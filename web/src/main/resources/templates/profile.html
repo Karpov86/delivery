@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title><span th:text="${user.getUsername()}"/> </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div th:insert="header::copy"></div>
+<div>
+    <table class="table">
+        <thead class="table">
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${user}">
+            <td><span th:text="${user.getUsername()}">Username</span></td>
+            <td><span th:text="${user.getRoles()}">Role</span></td>
+            <td><span th:text="${user.getPassword()}">Password</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:insert="footer::copy"></div>
+</body>
+</html>

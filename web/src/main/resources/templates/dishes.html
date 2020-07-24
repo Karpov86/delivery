@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="copy" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+<body>
+<div th:insert="header::copy"></div>
+<div th:insert="category::copy"></div>
+<table class="table">
+    <thead class="table">
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${dishes.isEmpty()}">
+        <td colspan="2">No dishes available</td>
+    </tr>
+    <tr th:each="dish : ${dishes}">
+        <td><span th:text="${dish.getTitle()}">Title</span></td>
+        <td><span th:text="'$ '+${dish.getPrice()}">Price</span></td>
+        <td><span th:text="${dish.getDescription()}">Description</span></td>
+        <td>
+            <form action="/order" method="post">
+                <input hidden name="dishId" th:value="${dish.getId()}">
+                <input hidden name="category" th:value="${dish.getCategory()}">
+                <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                <button type="submit">Add to order</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:insert="footer::copy"></div>
+</body>
+</html>

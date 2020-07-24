@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="header::copy"></div>
+<div class="container ml-auto">
+    <h3>Login</h3>
+    <div class="alert alert-danger w-25" role="alert" th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div class="alert alert-danger w-25" role="alert" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form method="post" th:action="@{/login}">
+        <div class="form-group w-25">
+            <label for="name"> User Name : </label>
+            <input class="form-control is-valid" id="name" name="username" required type="text"/>
+            <label for="password"> Password: </label>
+            <input class="form-control is-valid" id="password" name="password" required type="password"/>
+        </div>
+        <button class="btn btn-primary mt-1" type="submit">Log in</button>
+    </form>
+</div>
+<div th:insert="footer::copy"></div>
+</body>
+</html>
