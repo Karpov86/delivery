@@ -3,15 +3,14 @@ package by.karpov.delivery.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 
 @Entity
 @Table(name = "dishes")
@@ -33,8 +32,7 @@ public class Dish extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @ManyToMany(mappedBy = "dishes")
+    private List<Order> order;
 
 }

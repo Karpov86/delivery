@@ -1,6 +1,13 @@
 package by.karpov.delivery.entity;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
 
-    ADMIN, USER
+public enum Role implements GrantedAuthority {
+
+    ADMIN, USER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
