@@ -1,17 +1,25 @@
 package by.karpov.delivery.service;
 
 import by.karpov.delivery.entity.User;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
-import java.util.Set;
 
-@Service
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
-    User getUserById(Long id);
-    List<User> findAllUser();
+    User getById(Long id);
+
+    User findByUsername(String name);
+
+    List<User> findAll();
+
     User save(User user);
+
     User update(User user);
+
     void delete(Long id);
+
+    UserDetails getUserDetails();
+
 }
