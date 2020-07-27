@@ -22,4 +22,6 @@ public interface UserService extends UserDetailsService {
 
     UserDetails getUserDetails();
 
+    User getUserFromSecurityContext();
+
 }

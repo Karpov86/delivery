@@ -1,21 +1,41 @@
-create table orders
+create table dishes
 (
-    id   bigint auto_increment
+    id          bigint auto_increment
         primary key,
-    data datetime(6) null
+    category    varchar(255)   null,
+    description varchar(255)   null,
+    sale        bit            null,
+    price       decimal(19, 2) null,
+    title       varchar(255)   null
 );
 
-create table dishes
+create table users
 (
     id       bigint auto_increment
         primary key,
-    category varchar(255)   null,
-    sale     bit            null,
-    price    decimal(19, 2) null,
-    title    varchar(255)   null,
-    order_id bigint         null,
-    constraint FK9i7bdexxjb8go3rndk0ucj4gb
-        foreign key (order_id) references orders (id)
+    active   bit          not null,
+    password varchar(255) null,
+    username varchar(255) null
+);
+
+create table orders
+(
+    id      bigint auto_increment
+        primary key,
+    data    datetime(6) null,
+    user_id bigint      null,
+    constraint FK32ql8ubntj5uh44ph9659tiih
+        foreign key (user_id) references users (id)
+);
+
+create table order_dish
+(
+    order_id bigint not null,
+    dish_id  bigint not null,
+    constraint FK1fevhe8ke4l3uebaotqn5ae77
+        foreign key (order_id) references orders (id),
+    constraint FKsxcogiw9xscinh77ixpor5apo
+        foreign key (dish_id) references dishes (id)
 );
 
 create table personal_info
@@ -23,7 +43,12 @@ create table personal_info
     id           bigint auto_increment
         primary key,
     email        varchar(255) null,
-    phone_number varchar(255) null
+    first_name   varchar(255) null,
+    last_name    varchar(255) null,
+    phone_number varchar(255) null,
+    user_id      bigint       null,
+    constraint FK2ooyctbfk03w21tuk720ixnqh
+        foreign key (user_id) references users (id)
 );
 
 create table addresses
@@ -53,17 +78,11 @@ create table credit_cards
         foreign key (personal_info_id) references personal_info (id)
 );
 
-create table users
+create table user_role
 (
-    id               bigint auto_increment
-        primary key,
-    login            varchar(255) null,
-    password         varchar(255) null,
-    role             varchar(255) null,
-    personal_info_id bigint       null,
-    constraint FK3gv2nmhlal71u42s59b0ruwjl
-        foreign key (personal_info_id) references personal_info (id)
+    user_id bigint       not null,
+    roles   varchar(255) null,
+    constraint FKj345gk1bovqvfame88rcx7yyx
+        foreign key (user_id) references users (id)
 );
-
-
 

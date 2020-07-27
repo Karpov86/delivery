@@ -2,7 +2,7 @@
 <html lang="en" th:fragment="copy" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>Delivery</title>
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 </head>
@@ -23,12 +23,12 @@
         </tr>
         <tr th:each="user : ${users}">
             <td><span th:text="${user.getUsername()}">Username</span></td>
-            <td><span th:text="${user.getRoles()}">Role</span></td>
             <td><span th:text="${user.getPassword()}">Password</span></td>
         </tr>
         </tbody>
     </table>
 </div>
+
 <div th:insert="footer::copy"></div>
 </body>
 </html>

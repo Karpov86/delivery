@@ -1,6 +1,7 @@
 package by.karpov.delivery.service.impl;
 
 import by.karpov.delivery.entity.Order;
+import by.karpov.delivery.entity.User;
 import by.karpov.delivery.repository.OrderRepository;
 import by.karpov.delivery.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void delete(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    @Override
+    public Order getByUser(User user) {
+        return orderRepository.findByUser(user);
     }
 }

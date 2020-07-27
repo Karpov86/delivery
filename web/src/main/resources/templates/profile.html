@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title><span th:text="${user.getUsername()}"/> </title>
+    <title>Delivery</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
 <div th:insert="header::copy"></div>
-<div>
-    <table class="table">
-        <thead class="table">
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Role</th>
-            <th scope="col">Password</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:object="${user}">
-            <td><span th:text="${user.getUsername()}">Username</span></td>
-            <td><span th:text="${user.getRoles()}">Role</span></td>
-            <td><span th:text="${user.getPassword()}">Password</span></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container p-5 m-0">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body" th:object="${info}">
+                    <h5 class="card-title">User info</h5>
+                    <p class="card-text">First name: <span
+                            th:text="*{getFirstName().isEmpty()}?'No name first name':*{getFirstName()}"></span></p>
+                    <p class="card-text">Last name: <span
+                            th:text="*{getLastName().isEmpty()}?'No last name':*{getLastName()}"></span></p>
+                    <p class="card-text">Email: <span th:text="*{getEmail().isEmpty()}?'No email':*{getEmail()}"></span>
+                    </p>
+                    <p class="card-text">Phone number: <span
+                            th:text="*{getPhoneNumber().isEmpty()}?'No phone number':*{getPhoneNumber()}"></span></p>
+                    <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Addresses</h5>
+                    <ul class="list-group" th:each="address : ${info.getAddresses()}">
+                        <li class="list-group">
+                            <span th:text="${address.getFullAddress()}"></span>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div th:insert="footer::copy"></div>
 </body>
 </html>

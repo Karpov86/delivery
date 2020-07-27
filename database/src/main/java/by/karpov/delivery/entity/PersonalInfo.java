@@ -32,20 +32,10 @@ public class PersonalInfo extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(
-            mappedBy = "personalInfo",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "personalInfo")
     private Set<Address> addresses = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "personalInfo",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "personalInfo")
     private Set<CreditCard> creditCards = new HashSet<>();
 
 

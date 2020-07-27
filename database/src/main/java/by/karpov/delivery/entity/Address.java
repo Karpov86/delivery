@@ -37,6 +37,11 @@ public class Address extends BaseEntity {
     @JoinColumn(name = "personalInfo_id")
     private PersonalInfo personalInfo;
 
+    public String getFullAddress() {
+        return cityName + ", st. " + streetName + ", " + houseNumber
+                + " - " + flatNumber + ", ent. " + entranceNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
