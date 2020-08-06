@@ -1,8 +1,7 @@
 package by.karpov.delivery.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,9 +9,12 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "addresses")
+@Proxy
 public class Address extends BaseEntity {
 
     @Column(name = "city")
@@ -34,12 +36,13 @@ public class Address extends BaseEntity {
     private String entranceNumber;
 
     @ManyToOne
-    @JoinColumn(name = "personalInfo_id")
+    @JoinColumn(name = "personal_info_id")
     private PersonalInfo personalInfo;
 
     public String getFullAddress() {
         return cityName + ", st. " + streetName + ", " + houseNumber
-                + " - " + flatNumber + ", ent. " + entranceNumber;
+                + " - " + flatNumber + ", ent. " + entranceNumber
+                + ", stage " + stageNumber;
     }
 
     @Override
