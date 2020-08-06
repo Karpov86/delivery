@@ -7,18 +7,32 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 </head>
 <body>
-Add new user
-<div class="container" style="margin-top: 15%">
+<div th:insert="header::copy"></div>
+<div class="container mt-5 w-50">
     <form action="/registration" method="post">
         <div class="form-group-lg">
-            <label for="username">Username</label>
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-            <input class="form-control is-valid" id="username" name="username" required type="text"/>
-            <label for="password">Password</label>
-            <input class="form-control is is-valid" id="password" name="password" required type="password">
-            <button class="btn btn-primary" type="submit">Save</button>
+            <div th:object="${newUser}">
+                <label for="username">Username</label>
+                <input class="form-control is-valid" id="username" th:field="*{username}" required type="text"/>
+                <label for="password">Password</label>
+                <input class="form-control is is-valid" id="password" th:field="*{password}" required type="password">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </div>
+            <div th:object="${personalInfo}">
+                <label for="firstName">First name</label>
+                <input class="form-control is-valid" id="firstName" th:field="*{firstName}" required type="text">
+                <label for="lastName">Last name</label>
+                <input class="form-control is-valid" id="lastName" th:field="*{lastName}" required type="text">
+                <label for="phoneNumber">Phone number</label>
+                <input class="form-control is-valid" id="phoneNumber" th:field="*{phoneNumber}" required type="tel">
+                <label for="email">Email</label>
+                <input class="form-control is-valid" id="email" th:field="*{email}" required type="email">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Save</button>
         </div>
     </form>
 </div>
+<div th:insert="footer::copy"></div>
 </body>
 </html>
