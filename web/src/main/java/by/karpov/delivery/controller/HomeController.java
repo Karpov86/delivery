@@ -30,10 +30,13 @@ public class HomeController {
         this.orderService = orderService;
     }
 
+    @ModelAttribute("currentUser")
+    public User getCurrentUser(){
+        return userService.getUserFromSecurityContext();
+    }
+
     @GetMapping
-    public String homeView(Model model) {
-        User user = userService.getUserFromSecurityContext();
-        model.addAttribute("user", user);
+    public String homeView() {
         return "home";
     }
 
@@ -51,7 +54,6 @@ public class HomeController {
     public String showOrder(Model model) {
         User user = userService.getUserFromSecurityContext();
         List<Dish> dishes = orderService.getByUser(user).getDishes();
-        model.addAttribute("user", user);
         model.addAttribute("dishes", dishes);
         return "order";
     }

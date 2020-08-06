@@ -3,6 +3,7 @@ package by.karpov.delivery.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "dishes")
+@Proxy
 public class Dish extends BaseEntity {
 
     @Column(name = "price")
@@ -32,7 +34,7 @@ public class Dish extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Category category;
 
-    @ManyToMany(mappedBy = "dishes")
+    @ManyToMany(mappedBy = "dishes", fetch = FetchType.EAGER)
     private List<Order> order;
 
 }
