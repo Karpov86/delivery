@@ -1,8 +1,6 @@
 package by.karpov.delivery.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +9,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "personal_info")
@@ -32,7 +32,7 @@ public class PersonalInfo extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "personalInfo")
+    @OneToMany(mappedBy = "personalInfo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "personalInfo")
