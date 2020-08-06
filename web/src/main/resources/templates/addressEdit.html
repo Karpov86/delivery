@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="header::copy"></div>
+<div class="container mt-3 w-50">
+    <form action="/address/edit" method="post">
+        <div class="form-group-lg">
+            <div th:object="${currentAddress}">
+                <label for="city">City</label>
+                <select class="form-control" id="city" name="city">
+                    <option>Brest</option>
+                    <option>Vitebsk</option>
+                    <option>Gomel</option>
+                    <option>Grodno</option>
+                    <option>Minsk</option>
+                    <option>Mogilev</option>
+                </select>
+                <label for="street">Street</label>
+                <input class="form-control is-valid" id="street" th:value="*{streetName}" name="street" required
+                       type="text">
+                <label for="house">House number</label>
+                <input class="form-control is-valid" id="house" th:value="*{houseNumber}" name="house" required
+                       type="text">
+                <label for="flat">Flat number</label>
+                <input class="form-control is-valid" id="flat" th:value="*{flatNumber}" name="flat" required
+                       type="text">
+                <label for="stage">Stage number</label>
+                <input class="form-control is-valid" id="stage" th:value="*{stageNumber}" name="stage" required
+                       type="text">
+                <label for="entrance">Entrance number</label>
+                <input class="form-control is-valid" id="entrance" th:value="*{entranceNumber}" name="entrance" required
+                       type="text">
+                <input hidden name="id" th:value="*{id}"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<div th:insert="footer::copy"></div>
+</body>
+</html>

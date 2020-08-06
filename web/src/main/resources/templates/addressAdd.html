@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="header::copy"></div>
+<div class="container mt-3">
+    <form action="/address/add" method="post">
+        <div class="form-group w-50" th:object="${newAddress}">
+            <label for="city">City</label>
+            <select class="form-control" id="city" name="city">
+                <option>Brest</option>
+                <option>Vitebsk</option>
+                <option>Gomel</option>
+                <option>Grodno</option>
+                <option>Minsk</option>
+                <option>Mogilev</option>
+            </select>
+            <label for="street">Street</label>
+            <input id="street" th:field="*{streetName}" class="form-control is-valid" required type="text">
+            <label for="house">House number</label>
+            <input id="house" th:field="*{houseNumber}" class="form-control is-valid" required type="text">
+            <label for="stage">Stage number</label>
+            <input id="stage" th:field="*{stageNumber}" class="form-control is-valid" required type="text">
+            <label for="flat">Flat number</label>
+            <input id="flat" th:field="*{flatNumber}" class="form-control is-valid" required type="text">
+            <label for="entrance">Entrance number</label>
+            <input id="entrance" th:field="*{entranceNumber}" class="form-control is-valid" required type="text">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            <button class="btn btn-primary mt-2" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<div th:insert="footer::copy"></div>
+</body>
+</html>
