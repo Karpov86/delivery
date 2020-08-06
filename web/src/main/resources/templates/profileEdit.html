@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="header::copy"></div>
+
+<div class="container mt-3 w-50" >
+    <form action="/user/profile/edit" method="post">
+        <div class="form-group-lg">
+            <div th:object="${currentUser}">
+                <label for="username">Username</label>
+                <input class="form-control is-valid" id="username" th:field="*{username}" name="username" required type="text"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </div>
+            <div th:object="${currentPersonalInfo}">
+                <label for="firstName">First name</label>
+                <input class="form-control is-valid" id="firstName" th:field="*{firstName}" name="firstName" required type="text">
+                <label for="lastName">Last name</label>
+                <input class="form-control is-valid" id="lastName" th:field="*{lastName}" name="lastName" required type="text">
+                <label for="phoneNumber">Phone number</label>
+                <input class="form-control is-valid" id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" required type="tel">
+                <label for="email">Email</label>
+                <input class="form-control is-valid" id="email" th:field="*{email}" name="email" required type="email">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<div th:insert="footer::copy"></div>
+</body>
+</html>
