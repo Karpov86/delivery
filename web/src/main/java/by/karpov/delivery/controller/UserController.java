@@ -16,23 +16,25 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String getUsers(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "user";
+    @ModelAttribute("currentUser")
+    public User getCurrentUser(){
+        return userService.getUserFromSecurityContext();
+    }
+
+    @ModelAttribute("currentPersonalInfo")
+    public PersonalInfo currentPersonalInfo() {
+        return getCurrentUser().getPersonalInfo();
     }
 
     @GetMapping("profile")
-    public String profile(Model model) {
-        User user = userService.getUserFromSecurityContext();
-        model.addAttribute("user", user);
+    public String profile() {
         return "header";
     }
 
@@ -40,7 +42,7 @@ public class UserController {
     public String viewProfile(@PathVariable Long id, Model model) {
         User user = userService.getById(id);
         User currentUser = userService.getUserFromSecurityContext();
-        if (user == null){
+        if (user == null) {
             return "redirect:/home";
         }
         if (!user.equals(currentUser)) {
@@ -51,22 +53,41 @@ public class UserController {
             personalInfo = new PersonalInfo();
         }
         Set<CreditCard> creditCards = personalInfo.getCreditCards();
-        if (creditCards == null){
+        if (creditCards == null) {
             creditCards = Collections.emptySet();
         }
-        model.addAttribute("user", user);
         model.addAttribute("info", personalInfo);
         model.addAttribute("credit", creditCards);
         return "profile";
     }
 
-    @PostMapping("/updateUser")
-    public String updateProfile(
-            @RequestParam String username
+    @GetMapping("/profile/edit")
+    public String profileEdit() {
+        return "profileEdit";
+    }
+
+    @PostMapping("/profile/edit")
+    public String updateUser(
+            @RequestParam String username,
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            @RequestParam String phoneNumber,
+            @RequestParam String email
     ) {
         User user = userService.getUserFromSecurityContext();
-        user.setUsername(username);
-        userService.save(user);
+        PersonalInfo personalInfo = user.getPersonalInfo();
+        personalInfo.setFirstName(firstName);
+        personalInfo.setLastName(lastName);
+        personalInfo.setPhoneNumber(phoneNumber);
+        personalInfo.setEmail(email);
+        user.setPersonalInfo(personalInfo);
+        if (!user.getUsername().equals(username)) {
+            user.setUsername(username);
+            userService.update(user);
+            return "redirect:/login";
+        }
+        userService.update(user);
         return "redirect:/user/" + user.getId();
     }
+
 }
