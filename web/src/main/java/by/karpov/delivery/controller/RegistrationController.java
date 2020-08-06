@@ -1,16 +1,18 @@
 package by.karpov.delivery.controller;
 
 import by.karpov.delivery.entity.Order;
+import by.karpov.delivery.entity.PersonalInfo;
 import by.karpov.delivery.entity.Role;
 import by.karpov.delivery.entity.User;
 import by.karpov.delivery.service.OrderService;
+import by.karpov.delivery.service.PersonalInfoService;
 import by.karpov.delivery.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,11 +23,26 @@ public class RegistrationController {
 
     private final UserServiceImpl userService;
     private final OrderService orderService;
+    private final PersonalInfoService personalInfoService;
 
     @Autowired
-    public RegistrationController(UserServiceImpl userService, OrderService orderService) {
+    public RegistrationController(UserServiceImpl userService, OrderService orderService, PersonalInfoService personalInfoService) {
         this.userService = userService;
         this.orderService = orderService;
+        this.personalInfoService = personalInfoService;
+    }
+
+    @ModelAttribute("newUser")
+    public User emptyUser() {
+        return User.builder()
+                .active(true)
+                .roles(Collections.singleton(Role.USER))
+                .build();
+    }
+
+    @ModelAttribute("personalInfo")
+    public PersonalInfo emptyPersonalInfo() {
+        return new PersonalInfo();
     }
 
     @GetMapping
@@ -34,23 +51,17 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password
-    ) {
-        User user = User.builder()
-                .username(username)
-                .password(password)
-                .active(true)
-                .roles(Collections.singleton(Role.USER))
-                .build();
-        userService.save(user);
+    public String addUser(User newUser, PersonalInfo personalInfo) {
+        newUser.setRoles(Collections.singleton(Role.USER));
+        newUser.setActive(true);
+        userService.save(newUser);
+        personalInfo.setUser(newUser);
+        personalInfoService.save(personalInfo);
         Order order = Order.builder()
                 .dishes(new ArrayList<>())
-                .user(user)
+                .user(newUser)
                 .build();
         orderService.save(order);
         return "redirect:/login";
     }
-
 }
