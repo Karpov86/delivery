@@ -1,6 +1,7 @@
 package by.karpov.delivery.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Proxy
 public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "username")
@@ -27,7 +29,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private boolean active;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Order order;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

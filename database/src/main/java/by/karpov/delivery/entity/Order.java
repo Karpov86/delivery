@@ -1,6 +1,7 @@
 package by.karpov.delivery.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,9 +15,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@Proxy
 public class Order extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
