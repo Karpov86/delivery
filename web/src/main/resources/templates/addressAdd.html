@@ -20,17 +20,18 @@
                 <option>Mogilev</option>
             </select>
             <label for="street">Street</label>
-            <input id="street" th:field="*{streetName}" class="form-control is-valid" required type="text">
+            <input class="form-control is-valid" id="street" required th:field="*{streetName}" type="text">
             <label for="house">House number</label>
-            <input id="house" th:field="*{houseNumber}" class="form-control is-valid" required type="text">
+            <input class="form-control is-valid" id="house" required th:field="*{houseNumber}" type="text">
             <label for="stage">Stage number</label>
-            <input id="stage" th:field="*{stageNumber}" class="form-control is-valid" required type="text">
+            <input class="form-control is-valid" id="stage" required th:field="*{stageNumber}" type="text">
             <label for="flat">Flat number</label>
-            <input id="flat" th:field="*{flatNumber}" class="form-control is-valid" required type="text">
+            <input class="form-control is-valid" id="flat" required th:field="*{flatNumber}" type="text">
             <label for="entrance">Entrance number</label>
-            <input id="entrance" th:field="*{entranceNumber}" class="form-control is-valid" required type="text">
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            <input class="form-control is-valid" id="entrance" required th:field="*{entranceNumber}" type="text">
+            <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
             <button class="btn btn-primary mt-2" type="submit">Save</button>
+            <a class="btn btn-secondary mt-2" role="button" th:href="@{'/user/'+${currentUser?.getId()}}">Cancel</a>
         </div>
     </form>
 </div>
