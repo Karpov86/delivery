@@ -1,9 +1,11 @@
 package by.karpov.delivery.controller;
 
 import by.karpov.delivery.entity.Address;
+import by.karpov.delivery.entity.Order;
 import by.karpov.delivery.entity.PersonalInfo;
 import by.karpov.delivery.entity.User;
 import by.karpov.delivery.service.AddressService;
+import by.karpov.delivery.service.OrderService;
 import by.karpov.delivery.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,13 @@ public class AddressController {
 
     private final UserService userService;
     private final AddressService addressService;
+    private final OrderService orderService;
 
     @Autowired
-    public AddressController(UserService userService, AddressService addressService) {
+    public AddressController(UserService userService, AddressService addressService, OrderService orderService) {
         this.userService = userService;
         this.addressService = addressService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute("currentUser")
@@ -31,6 +35,11 @@ public class AddressController {
     @ModelAttribute("newAddress")
     public Address newAddress() {
         return new Address();
+    }
+
+    @ModelAttribute("currentOrder")
+    public Order getCurrentOrder() {
+        return orderService.getLast(getCurrentUser());
     }
 
     @GetMapping("/edit/{id}")
@@ -74,10 +83,11 @@ public class AddressController {
         addressService.save(address);
         return "redirect:/user/" + getCurrentUser().getId();
     }
+
     @PostMapping("/delete")
-    public String deleteAddress(@RequestParam Long id){
+    public String deleteAddress(@RequestParam Long id) {
         Address address = addressService.getById(id);
         addressService.deleteByAddress(address);
-        return "redirect:/home";
+        return "redirect:/user/" + getCurrentUser().getId();
     }
 }
