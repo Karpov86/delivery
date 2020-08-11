@@ -13,21 +13,21 @@
         <div class="form-group-lg">
             <div th:object="${newUser}">
                 <label for="username">Username</label>
-                <input class="form-control is-valid" id="username" th:field="*{username}" required type="text"/>
+                <input class="form-control is-valid" id="username" required th:field="*{username}" type="text"/>
                 <label for="password">Password</label>
-                <input class="form-control is is-valid" id="password" th:field="*{password}" required type="password">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input class="form-control is is-valid" id="password" required th:field="*{password}" type="password">
+                <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
             </div>
             <div th:object="${personalInfo}">
                 <label for="firstName">First name</label>
-                <input class="form-control is-valid" id="firstName" th:field="*{firstName}" required type="text">
+                <input class="form-control is-valid" id="firstName" required th:field="*{firstName}" type="text">
                 <label for="lastName">Last name</label>
-                <input class="form-control is-valid" id="lastName" th:field="*{lastName}" required type="text">
+                <input class="form-control is-valid" id="lastName" required th:field="*{lastName}" type="text">
                 <label for="phoneNumber">Phone number</label>
-                <input class="form-control is-valid" id="phoneNumber" th:field="*{phoneNumber}" required type="tel">
+                <input class="form-control is-valid" id="phoneNumber" required th:field="*{phoneNumber}" type="tel">
                 <label for="email">Email</label>
-                <input class="form-control is-valid" id="email" th:field="*{email}" required type="email">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input class="form-control is-valid" id="email" required th:field="*{email}" type="email">
+                <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
             </div>
             <button class="btn btn-primary mt-2" type="submit">Save</button>
         </div>

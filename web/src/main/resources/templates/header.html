@@ -8,10 +8,12 @@
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" th:href="@{/registration}">Registration</a>
-        <a class="p-2 text-dark" th:if="${currentUser?.getId()}"
-           th:href="@{'/user/'+${currentUser?.getId()}}">Profile</a>
+        <a class="p-2 text-dark" th:href="@{'/user/'+${currentUser?.getId()}}"
+           th:if="${currentUser?.id}">Profile</a>
         <a class="p-2 text-dark" th:unless="${currentUser?.getId()}"></a>
-        <a class="p-2 text-dark" th:href="@{/home/order}">Order</a>
+        <a class="p-2 text-dark" th:href="@{/order}">Order<span class="alert alert-danger p-sm-1"
+                                                                th:if="${currentUser?.id}"
+                                                                th:text="${currentOrder.dishes.size()}"></span></a>
     </nav>
     <a class="btn btn-outline-primary" th:href="@{/login}">Sign up</a>
     <form method="post" th:action="@{/logout}">
