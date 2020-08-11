@@ -1,6 +1,5 @@
 package by.karpov.delivery.service.impl;
 
-import by.karpov.delivery.entity.Order;
 import by.karpov.delivery.entity.PersonalInfo;
 import by.karpov.delivery.entity.User;
 import by.karpov.delivery.repository.PersonalInfoRepository;

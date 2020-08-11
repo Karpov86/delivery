@@ -70,9 +70,9 @@ create table credit_cards
 (
     id               bigint auto_increment
         primary key,
-    data             varchar(255) null,
+    date             varchar(255) null,
     number           varchar(255) null,
-    vcc              varchar(255) null,
+    cvv              varchar(255) null,
     personal_info_id bigint       null,
     constraint FKf4lqueasbu48c75vvcmk7bb3c
         foreign key (personal_info_id) references personal_info (id)

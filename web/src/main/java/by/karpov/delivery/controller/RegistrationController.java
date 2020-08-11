@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -60,6 +61,7 @@ public class RegistrationController {
         Order order = Order.builder()
                 .dishes(new ArrayList<>())
                 .user(newUser)
+                .dateTime(LocalDateTime.now())
                 .build();
         orderService.save(order);
         return "redirect:/login";

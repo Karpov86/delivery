@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.annotations.Proxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -29,7 +28,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private boolean active;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
     private Order order;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

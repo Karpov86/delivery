@@ -32,10 +32,10 @@ public class PersonalInfo extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "personalInfo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "personalInfo", fetch = FetchType.EAGER)
     private Set<Address> addresses = new HashSet<>();
 
-    @OneToMany(mappedBy = "personalInfo")
+    @OneToMany(mappedBy = "personalInfo", fetch = FetchType.EAGER)
     private Set<CreditCard> creditCards = new HashSet<>();
 
 
