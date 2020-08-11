@@ -42,7 +42,7 @@ public class Address extends BaseEntity {
     public String getFullAddress() {
         return cityName + ", st. " + streetName + ", " + houseNumber
                 + " - " + flatNumber + ", ent. " + entranceNumber
-                + ", stage " + stageNumber;
+                + ", fl. " + stageNumber;
     }
 
     @Override
