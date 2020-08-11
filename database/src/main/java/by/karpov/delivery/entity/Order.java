@@ -18,7 +18,7 @@ import java.util.List;
 @Proxy
 public class Order extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
