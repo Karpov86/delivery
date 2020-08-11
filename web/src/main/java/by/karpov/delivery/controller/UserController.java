@@ -1,12 +1,13 @@
 package by.karpov.delivery.controller;
 
 import by.karpov.delivery.entity.CreditCard;
+import by.karpov.delivery.entity.Order;
 import by.karpov.delivery.entity.PersonalInfo;
 import by.karpov.delivery.entity.User;
+import by.karpov.delivery.service.OrderService;
 import by.karpov.delivery.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -17,15 +18,22 @@ import java.util.Set;
 public class UserController {
 
     private final UserService userService;
-
+    private final OrderService orderService;
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, OrderService orderService) {
         this.userService = userService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute("currentUser")
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         return userService.getUserFromSecurityContext();
+    }
+
+    @ModelAttribute("currentOrder")
+    public Order getCurrentOrder() {
+        return orderService.getLast(getCurrentUser());
+        //return getCurrentUser().getOrder();
     }
 
     @ModelAttribute("currentPersonalInfo")
@@ -39,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public String viewProfile(@PathVariable Long id, Model model) {
+    public String viewProfile(@PathVariable Long id) {
         User user = userService.getById(id);
         User currentUser = userService.getUserFromSecurityContext();
         if (user == null) {
@@ -56,8 +64,6 @@ public class UserController {
         if (creditCards == null) {
             creditCards = Collections.emptySet();
         }
-        model.addAttribute("info", personalInfo);
-        model.addAttribute("credit", creditCards);
         return "profile";
     }
 
