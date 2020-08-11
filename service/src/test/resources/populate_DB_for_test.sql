@@ -13,7 +13,7 @@ VALUES (1, 'Minsk', '1', '1', '1', '1', 'Masherova', 1),
        (2, 'Moscow', '2', '2', '2', '2', 'Lomonosova', 2),
        (3, 'Kiev', '3', '3', '3', '3', 'Svetlaya', 3);
 
-INSERT INTO credit_cards(id, data, number, vcc, personal_info_id)
+INSERT INTO credit_cards(id, date, number, cvv, personal_info_id)
 VALUES (1, '07/2022', '1111 1111 1111 1111', '123', 1),
        (2, '07/2022', '2222 2222 2222 2222', '123', 2),
        (3, '07/2022', '3333 3333 3333 3333', '123', 3);
@@ -21,7 +21,8 @@ VALUES (1, '07/2022', '1111 1111 1111 1111', '123', 1),
 INSERT INTO orders(id, data, user_id)
 VALUES (1, '2020-07-20 18:30:00', 1),
        (2, '2020-07-20 19:00:00', 2),
-       (3, '2020-07-20 23:50:50', 3);
+       (3, '2020-07-20 23:50:00', 3),
+       (4, '2020-08-20 10:50:00', 1);
 
 INSERT INTO dishes(id, category, description, sale, price, title)
 VALUES (1, 'PIZZA', '', false, 12.05, 'Italian'),
