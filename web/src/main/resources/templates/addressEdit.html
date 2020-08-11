@@ -21,24 +21,25 @@
                     <option>Mogilev</option>
                 </select>
                 <label for="street">Street</label>
-                <input class="form-control is-valid" id="street" th:value="*{streetName}" name="street" required
+                <input class="form-control is-valid" id="street" name="street" required th:value="*{streetName}"
                        type="text">
                 <label for="house">House number</label>
-                <input class="form-control is-valid" id="house" th:value="*{houseNumber}" name="house" required
+                <input class="form-control is-valid" id="house" name="house" required th:value="*{houseNumber}"
                        type="text">
                 <label for="flat">Flat number</label>
-                <input class="form-control is-valid" id="flat" th:value="*{flatNumber}" name="flat" required
+                <input class="form-control is-valid" id="flat" name="flat" required th:value="*{flatNumber}"
                        type="text">
                 <label for="stage">Stage number</label>
-                <input class="form-control is-valid" id="stage" th:value="*{stageNumber}" name="stage" required
+                <input class="form-control is-valid" id="stage" name="stage" required th:value="*{stageNumber}"
                        type="text">
                 <label for="entrance">Entrance number</label>
-                <input class="form-control is-valid" id="entrance" th:value="*{entranceNumber}" name="entrance" required
+                <input class="form-control is-valid" id="entrance" name="entrance" required th:value="*{entranceNumber}"
                        type="text">
                 <input hidden name="id" th:value="*{id}"/>
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
             </div>
             <button class="btn btn-primary mt-2" type="submit">Save</button>
+            <a class="btn btn-secondary mt-2" role="button" th:href="@{'/user/'+${currentUser?.getId()}}">Cancel</a>
         </div>
     </form>
 </div>
