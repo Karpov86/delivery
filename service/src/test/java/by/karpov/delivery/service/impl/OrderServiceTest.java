@@ -1,62 +1,78 @@
 package by.karpov.delivery.service.impl;
 
-import by.karpov.delivery.entity.Dish;
+import by.karpov.delivery.BaseTest;
 import by.karpov.delivery.entity.Order;
 import by.karpov.delivery.entity.User;
 import by.karpov.delivery.service.OrderService;
 import by.karpov.delivery.service.UserService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
-@Transactional
-@Sql(
-        scripts = "/populate_DB_for_test.sql",
-        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-)
-class OrderServiceTest {
+
+class OrderServiceTest extends BaseTest {
 
     @Autowired
-    private UserService userService;
+    OrderService orderService;
     @Autowired
-    private OrderService orderService;
+    UserService userService;
 
     @Test
     void getById() {
+        long expectedId = 1L;
+        Order order = orderService.getById(expectedId);
+        assertNotNull(order);
+        assertEquals(expectedId, order.getId());
     }
 
     @Test
     void save() {
         Order order = Order.builder()
                 .dateTime(LocalDateTime.now())
-                .dishes(new ArrayList<>())
+                .dishes(new ArrayList<>(Collections.emptyList()))
+                .user(new User())
                 .build();
+        assertNull(order.getId());
         orderService.save(order);
-        Long id = order.getId();
-        assertNotNull(id);
-        System.out.println(id);
+        assertEquals(5L, order.getId());
     }
 
     @Test
     void delete() {
+        long id = 4L;
+        orderService.delete(id);
+        Throwable thrown = Assert.assertThrows(JpaObjectRetrievalFailureException.class, () -> orderService.getById(id));
+        String message = thrown.getMessage();
+        System.out.println(message);
     }
 
     @Test
-    void getByUser() {
-        User user = userService.getById(1L);
-        Order order = orderService.getByUser(user);
-        System.out.println(order.getDateTime());
-        List<Dish> dishes = order.getDishes();
-        dishes.stream().map(d -> d.getTitle() + " " + d.getCategory()).forEach(System.out::println);
+    void getTotalPrice() {
+        Order order = orderService.getById(1L);
+        BigDecimal exceptionTotalPrice = BigDecimal.valueOf(37.15);
+        BigDecimal totalPrice = orderService.getTotalPrice(order);
+        assertEquals(exceptionTotalPrice, totalPrice);
     }
 
+    @Test
+    void getAllByUser() {
+        User user = userService.getById(1L);
+        List<Order> allByUser = orderService.getAllByUser(user);
+        assertEquals(2, allByUser.size());
+    }
+
+    @Test
+    void getLastByUser() {
+        User user = userService.getById(1L);
+        Order order = orderService.getLastByUser(user);
+        assertEquals(4L, order.getId());
+    }
 }
