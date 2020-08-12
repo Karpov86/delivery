@@ -33,7 +33,7 @@ public class CreditCardController {
 
     @ModelAttribute("currentOrder")
     public Order getCurrentOrder() {
-        return orderService.getLast(getCurrentUser());
+        return orderService.getLastByUser(getCurrentUser());
     }
 
     @ModelAttribute("newCreditCard")

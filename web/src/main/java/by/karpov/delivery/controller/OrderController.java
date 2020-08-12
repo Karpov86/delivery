@@ -11,12 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 @Controller
 @RequestMapping("order")
@@ -40,7 +38,7 @@ public class OrderController {
 
     @ModelAttribute("currentOrder")
     public Order getCurrentOrder() {
-        return orderService.getLast(getCurrentUser());
+        return orderService.getLastByUser(getCurrentUser());
         //return getCurrentUser().getOrder();
     }
 
@@ -59,7 +57,7 @@ public class OrderController {
     @PostMapping("/add")
     public String addDish(@RequestParam("dishId") Long id) {
         //Order order = getCurrentUser().getOrder();
-        Order order = orderService.getLast(getCurrentUser());
+        Order order = orderService.getLastByUser(getCurrentUser());
         Dish dish = dishService.getById(id);
         order.getDishes().add(dish);
         orderService.save(order);
@@ -67,7 +65,7 @@ public class OrderController {
     }
 
     @PostMapping("/delete")
-    public String deleteDish(@RequestParam Long id){
+    public String deleteDish(@RequestParam Long id) {
         Order order = getCurrentOrder();
         Dish dish = order.getDishes().stream()
                 .filter(d -> d.getId().equals(id))
@@ -79,9 +77,9 @@ public class OrderController {
     }
 
     @PostMapping("/submit")
-    public String submitOrder(){
+    public String submitOrder() {
         User user = getCurrentUser();
-        if (orderService.getLast(user).getDishes().isEmpty()){
+        if (orderService.getLastByUser(user).getDishes().isEmpty()) {
             return "redirect:/order";
         }
         Order order = Order.builder()

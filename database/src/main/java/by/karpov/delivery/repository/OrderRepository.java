@@ -9,6 +9,6 @@ import java.util.List;
 
 @Transactional
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    Order findByUser(User user);
-    List<Order> findAllByUser (User user);
+
+    List<Order> findAllByUser(User user);
 }

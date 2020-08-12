@@ -22,15 +22,15 @@ INSERT INTO orders(id, data, user_id)
 VALUES (1, '2020-07-20 18:30:00', 1),
        (2, '2020-07-20 19:00:00', 2),
        (3, '2020-07-20 23:50:50', 3),
-
-INSERT INTO dishes(id, category, description, sale, price, title)
+    INSERT
+INTO dishes(id, category, description, sale, price, title)
 VALUES (1, 'PIZZA', '', false, 12.05, 'Italian'),
-       (2, 'PIZZA', '', false, 15.05, 'Chicago'),
-       (3, 'SUSHI', '', false, 10.05, 'Philadelphia'),
-       (4, 'SUSHI', '', false, 12.05, 'Black dragon'),
-       (5, 'VEGETARIAN', '', false, 22.05, 'Seeds'),
-       (6, 'VEGETARIAN', '', false, 22.05, 'Grass'),
-       (7, 'VEGETARIAN', '', false, 22.05, 'Some without taste');
+    (2, 'PIZZA', '', false, 15.05, 'Chicago'),
+    (3, 'SUSHI', '', false, 10.05, 'Philadelphia'),
+    (4, 'SUSHI', '', false, 12.05, 'Black dragon'),
+    (5, 'VEGETARIAN', '', false, 22.05, 'Seeds'),
+    (6, 'VEGETARIAN', '', false, 22.05, 'Grass'),
+    (7, 'VEGETARIAN', '', false, 22.05, 'Some without taste');
 
 INSERT INTO user_role(user_id, roles)
 VALUES (1, 'USER'),

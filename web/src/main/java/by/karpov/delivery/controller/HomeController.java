@@ -36,7 +36,7 @@ public class HomeController {
 
     @ModelAttribute("currentOrder")
     public Order getCurrentOrder() {
-        return orderService.getLast(getCurrentUser());
+        return orderService.getLastByUser(getCurrentUser());
     }
 
     @GetMapping

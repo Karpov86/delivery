@@ -8,7 +8,6 @@ import by.karpov.delivery.service.OrderService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,20 +36,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getByUser(User user) {
-        return orderRepository.findByUser(user);
-    }
-
-    @Override
     public BigDecimal getTotalPrice(Order order) {
         List<Dish> dishes = order.getDishes();
-        if (!dishes.isEmpty()){
+        if (!dishes.isEmpty()) {
             return dishes.stream()
                     .map(Dish::getPrice)
                     .reduce(BigDecimal::add)
                     .get();
         }
-        return new  BigDecimal(0);
+        return new BigDecimal(0);
     }
 
     @Override
@@ -59,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getLast(User user) {
+    public Order getLastByUser(User user) {
         List<Order> allByUser = orderRepository.findAllByUser(user);
         return allByUser.stream()
                 .max(Comparator.comparing(Order::getDateTime))

@@ -19,6 +19,7 @@ public class UserController {
 
     private final UserService userService;
     private final OrderService orderService;
+
     @Autowired
     public UserController(UserService userService, OrderService orderService) {
         this.userService = userService;
@@ -32,7 +33,7 @@ public class UserController {
 
     @ModelAttribute("currentOrder")
     public Order getCurrentOrder() {
-        return orderService.getLast(getCurrentUser());
+        return orderService.getLastByUser(getCurrentUser());
         //return getCurrentUser().getOrder();
     }
 

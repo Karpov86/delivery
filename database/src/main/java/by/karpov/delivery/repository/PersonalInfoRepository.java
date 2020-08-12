@@ -7,5 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface PersonalInfoRepository extends JpaRepository<PersonalInfo, Long> {
+
     PersonalInfo findByUser(User user);
 }
