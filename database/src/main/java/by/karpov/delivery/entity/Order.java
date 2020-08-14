@@ -22,7 +22,7 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "data")
+    @Column(name = "date")
     private LocalDateTime dateTime;
 
     @ManyToMany(fetch = FetchType.EAGER)

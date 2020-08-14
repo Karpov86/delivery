@@ -16,7 +16,7 @@
                 <p class="card-text">Username: <span
                         th:text="${currentUser.getUsername()}"></span></p>
                 <p class="card-text">First name: <span
-                        th:text="*{getFirstName().isEmpty()}?'No name first name':*{getFirstName()}"></span></p>
+                        th:text="*{getFirstName().isEmpty()}?'No first name':*{getFirstName()}"></span></p>
                 <p class="card-text">Last name: <span
                         th:text="*{getLastName().isEmpty()}?'No last name':*{getLastName()}"></span></p>
                 <p class="card-text">Email: <span th:text="*{getEmail().isEmpty()}?'No email':*{getEmail()}"></span>

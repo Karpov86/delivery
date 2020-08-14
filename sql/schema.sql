@@ -3,7 +3,7 @@ create table dishes
     id          bigint auto_increment
         primary key,
     category    varchar(255)   null,
-    description varchar(255)   null,
+    description varchar(2048)   null,
     sale        bit            null,
     price       decimal(19, 2) null,
     title       varchar(255)   null
@@ -22,7 +22,7 @@ create table orders
 (
     id      bigint auto_increment
         primary key,
-    data    datetime(6) null,
+    date    datetime(6) null,
     user_id bigint      null,
     constraint FK32ql8ubntj5uh44ph9659tiih
         foreign key (user_id) references users (id)

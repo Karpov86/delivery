@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <tr th:if="${currentOrder.dishes.isEmpty()}">
-            <td colspan="2">No dishes available <a href="/home/dishes?category=PIZZA">add</a> something to order</td>
+            <td colspan="2">No dishes available <a href="/home/menu?category=PIZZA">add</a> something to order</td>
         </tr>
         <tr th:each="dish : ${currentOrder.dishes}">
             <td><span th:text="*{dish.getTitle()}">Title</span></td>

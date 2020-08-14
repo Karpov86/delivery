@@ -44,12 +44,12 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/dishes")
+    @GetMapping("/menu")
     public String getDishes(
             @RequestParam String category,
             Model model) {
         model.addAttribute("dishes", dishService.findAllByCategory(Category.valueOf(category.toUpperCase())));
-        return "dishes";
+        return "menu";
     }
 
 

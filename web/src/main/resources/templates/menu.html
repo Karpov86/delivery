@@ -24,9 +24,9 @@
             <td colspan="2">No dishes available</td>
         </tr>
         <tr th:each="dish : ${dishes}">
-            <td><span th:text="${dish.getTitle()}">Title</span></td>
-            <td><span th:text="'$ '+${dish.getPrice()}">Price</span></td>
-            <td><span th:text="${dish.getDescription()}">Description</span></td>
+            <td><span th:text="${dish.title}">Title</span></td>
+            <td><span th:text="'$ '+${dish.price}">Price</span></td>
+            <td><span th:text="${dish.description}">Description</span></td>
             <td>
                 <form action="/order/add" method="post">
                     <input hidden name="dishId" th:value="${dish.getId()}">

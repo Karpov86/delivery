@@ -13,17 +13,24 @@
         <thead class="table">
         <tr>
             <th scope="col">Username</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">Password</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${users.isEmpty()}">
+        <tr th:if="${userList.isEmpty()}">
             <td colspan="2">No user available</td>
         </tr>
-        <tr th:each="user : ${users}">
+        <tr th:each="user : ${userList}">
             <td><span th:text="${user.getUsername()}">Username</span></td>
-            <td><span th:text="${user.getPassword()}">Password</span></td>
+            <td><span th:text="${user.getPersonalInfo().firstName}">First name</span></td>
+            <td><span th:text="${user.getPersonalInfo().lastName}">Last name</span></td>
+            <td><span th:text="${user.getPersonalInfo().phoneNumber}">Phone number</span></td>
+            <td><span th:text="${user.getPersonalInfo().email}">Email</span></td>
+            <td th:each="role : ${user.roles}" ><p th:text="${role.toString()}"></p></td>
         </tr>
         </tbody>
     </table>

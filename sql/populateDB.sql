@@ -18,12 +18,12 @@ VALUES (1, '07/2022', '1111 1111 1111 1111', '123', 1),
        (2, '07/2022', '2222 2222 2222 2222', '123', 2),
        (3, '07/2022', '3333 3333 3333 3333', '123', 3);
 
-INSERT INTO orders(id, data, user_id)
+INSERT INTO orders(id, date, user_id)
 VALUES (1, '2020-07-20 18:30:00', 1),
        (2, '2020-07-20 19:00:00', 2),
-       (3, '2020-07-20 23:50:50', 3),
-    INSERT
-INTO dishes(id, category, description, sale, price, title)
+       (3, '2020-07-20 23:50:50', 3);
+
+INSERT INTO dishes(id, category, description, sale, price, title)
 VALUES (1, 'PIZZA', '', false, 12.05, 'Italian'),
     (2, 'PIZZA', '', false, 15.05, 'Chicago'),
     (3, 'SUSHI', '', false, 10.05, 'Philadelphia'),
