@@ -50,5 +50,9 @@
             <artifactId>jQuery</artifactId>
             <version>1.7.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
     </dependencies>
 </project>
