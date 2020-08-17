@@ -16,7 +16,7 @@
     </div>
     <form method="post" th:action="@{/login}">
         <div class="form-group w-25">
-            <label for="name"> User Name : </label>
+            <label for="name" th:text="#{username}"> </label>
             <input class="form-control is-valid" id="name" name="username" required type="text"/>
             <label for="password"> Password: </label>
             <input class="form-control is-valid" id="password" name="password" required type="password"/>
