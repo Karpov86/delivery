@@ -4,8 +4,10 @@ import lombok.*;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -33,4 +35,19 @@ public class Order extends BaseEntity {
     )
     private List<Dish> dishes;
 
+    public String getAllDishes(){
+        return dishes.stream()
+                .map(Dish::getTitle)
+                .collect(Collectors.joining(", "));
+    }
+
+    public BigDecimal getTotalPrice(){
+        if (!dishes.isEmpty()) {
+            return dishes.stream()
+                    .map(Dish::getPrice)
+                    .reduce(BigDecimal::add)
+                    .get();
+        }
+        return new BigDecimal(0);
+    }
 }

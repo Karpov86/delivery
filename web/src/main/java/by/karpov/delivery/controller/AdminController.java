@@ -1,9 +1,6 @@
 package by.karpov.delivery.controller;
 
-import by.karpov.delivery.entity.Category;
-import by.karpov.delivery.entity.Dish;
-import by.karpov.delivery.entity.Order;
-import by.karpov.delivery.entity.User;
+import by.karpov.delivery.entity.*;
 import by.karpov.delivery.service.DishService;
 import by.karpov.delivery.service.OrderService;
 import by.karpov.delivery.service.UserService;
@@ -54,6 +51,14 @@ public class AdminController {
         return "userList";
     }
 
+    @GetMapping("/user/orders/{userId}")
+    public String orderListView(@PathVariable Long userId, Model model){
+        User user = userService.getById(userId);
+        List<Order> orders = orderService.getAllByUser(user);
+        model.addAttribute("orderList", orders);
+        return "orderList";
+    }
+
     @GetMapping("/dishes")
     public String dishListView(Model model){
         List<Dish> dishList = dishService.findAll();
@@ -101,5 +106,24 @@ public class AdminController {
     public String dishDelete(@RequestParam Long dishId){
         dishService.delete(dishId);
         return "redirect:/admin/dishes";
+    }
+
+    @PostMapping("/user/delAdmin")
+    public String deleteAdminRole(@RequestParam Long userId){
+        User user = userService.getById(userId);
+        userService.deleteAdminRole(user);
+        userService.save(user);
+        if (userId.equals(getCurrentUser().getId())){
+            return "redirect:/home";
+        }
+        return "redirect:/admin/users";
+    }
+
+    @PostMapping("/user/addAdmin")
+    public String addAdminRole(@RequestParam Long userId){
+        User user = userService.getById(userId);
+        userService.addAdminRole(user);
+        userService.save(user);
+        return "redirect:/admin/users";
     }
 }
