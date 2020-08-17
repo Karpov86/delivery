@@ -1,4 +1,4 @@
-create table dishes
+create table if not exists dishes
 (
     id          bigint auto_increment
         primary key,
@@ -9,7 +9,7 @@ create table dishes
     title       varchar(255)   null
 );
 
-create table users
+create table if not exists users
 (
     id       bigint auto_increment
         primary key,
@@ -18,7 +18,7 @@ create table users
     username varchar(255) null
 );
 
-create table orders
+create table if not exists orders
 (
     id      bigint auto_increment
         primary key,
@@ -28,7 +28,7 @@ create table orders
         foreign key (user_id) references users (id)
 );
 
-create table order_dish
+create table if not exists order_dish
 (
     order_id bigint not null,
     dish_id  bigint not null,
@@ -38,7 +38,7 @@ create table order_dish
         foreign key (dish_id) references dishes (id)
 );
 
-create table personal_info
+create table if not exists personal_info
 (
     id           bigint auto_increment
         primary key,
@@ -51,7 +51,7 @@ create table personal_info
         foreign key (user_id) references users (id)
 );
 
-create table addresses
+create table if not exists addresses
 (
     id               bigint auto_increment
         primary key,
@@ -66,7 +66,7 @@ create table addresses
         foreign key (personal_info_id) references personal_info (id)
 );
 
-create table credit_cards
+create table if not exists credit_cards
 (
     id               bigint auto_increment
         primary key,
@@ -78,7 +78,7 @@ create table credit_cards
         foreign key (personal_info_id) references personal_info (id)
 );
 
-create table user_role
+create table if not exists user_role
 (
     user_id bigint       not null,
     roles   varchar(255) null,

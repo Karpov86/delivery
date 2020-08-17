@@ -8,7 +8,7 @@
 </head>
 <body>
 <div th:insert="header::copy"></div>
-<div>
+<div class="mx-5">
     <table class="table">
         <thead class="table">
         <tr>
@@ -17,7 +17,9 @@
             <th scope="col">Last name</th>
             <th scope="col">Phone number</th>
             <th scope="col">Email</th>
+            <th scope="col">Order list</th>
             <th scope="col">Role</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -25,17 +27,35 @@
             <td colspan="2">No user available</td>
         </tr>
         <tr th:each="user : ${userList}">
-            <td><span th:text="${user.getUsername()}">Username</span></td>
-            <td><span th:text="${user.getPersonalInfo().firstName}">First name</span></td>
-            <td><span th:text="${user.getPersonalInfo().lastName}">Last name</span></td>
-            <td><span th:text="${user.getPersonalInfo().phoneNumber}">Phone number</span></td>
-            <td><span th:text="${user.getPersonalInfo().email}">Email</span></td>
-            <td th:each="role : ${user.roles}" ><p th:text="${role.toString()}"></p></td>
+            <td><span th:text="${user.username}">Username</span></td>
+            <td><span th:text="${user.personalInfo.firstName}">First name</span></td>
+            <td><span th:text="${user.personalInfo.lastName}">Last name</span></td>
+            <td><span th:text="${user.personalInfo.phoneNumber}">Phone number</span></td>
+            <td><span th:text="${user.personalInfo.email}">Email</span></td>
+            <td><a class="btn btn-link" role="button"
+                   th:href="@{'/admin/user/orders/'+${user.id}}">to list</a></td>
+            <td><span th:each="role : ${user.roles}"><h6 th:text="${role.authority.toLowerCase()}"></h6></span></td>
+            <td>
+                <div th:if="${user.roles.size()==2}">
+                    <form method="post"
+                          th:action="@{/admin/user/delAdmin}">
+                        <input hidden name="userId" th:value="${user.id}">
+                        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                        <button class="btn btn-danger" type="submit">del admin role</button>
+                    </form>
+                </div>
+                <div th:if="${user.roles.size()==1}">
+                    <form method="post"
+                          th:action="@{/admin/user/addAdmin}">
+                        <input hidden name="userId" th:value="${user.id}">
+                        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                        <button class="btn btn-success" type="submit">add admin role</button>
+                    </form>
+                </div>
         </tr>
         </tbody>
     </table>
 </div>
-
 <div th:insert="footer::copy"></div>
 </body>
 </html>

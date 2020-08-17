@@ -12,6 +12,9 @@
         <a class="p-2 text-danger" th:each="role : ${currentUser?.roles}" th:if="${role.authority.equals('ADMIN')}"
            th:href="@{/admin/dishes}">Dish list</a>
 
+        <a class="p-2 text-danger" th:each="role : ${currentUser?.roles}" th:if="${role.authority.equals('ADMIN')}"
+           th:href="@{/admin/users}">User list</a>
+
         <a class="p-2 text-dark" th:href="@{'/user/'+${currentUser?.id}}"
            th:if="${currentUser?.id}">Profile</a>
         <a class="p-2 text-dark" th:unless="${currentUser?.id}"></a>
@@ -22,6 +25,7 @@
                 th:text="${currentOrder.dishes.size()}"></span></a>
     </nav>
     <a class="btn btn-outline-primary" th:href="@{/login}" th:unless="${currentUser?.id}">Sign up</a>
+
     <form method="post" th:action="@{/logout}">
         <input type="hidden" value="Sign Out"/>
         <button class="btn btn-outline-secondary ml-lg-2" th:if="${currentUser?.id}" type="submit">Log out</button>

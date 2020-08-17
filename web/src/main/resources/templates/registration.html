@@ -12,7 +12,8 @@
     <form action="/registration" method="post">
         <div class="form-group-lg">
             <div th:object="${newUser}">
-                <label for="username">Username</label>
+                <label for="username" class="text-danger" th:if="${message}" th:text="${message}"></label>
+                <label for="username" th:unless="${message}">Username </label>
                 <input class="form-control is-valid" id="username" required th:field="*{username}" type="text"/>
                 <label for="password">Password</label>
                 <input class="form-control is is-valid" id="password" required th:field="*{password}" type="password">
