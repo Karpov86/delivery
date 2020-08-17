@@ -1,5 +1,6 @@
 package by.karpov.delivery.service.impl;
 
+import by.karpov.delivery.entity.Role;
 import by.karpov.delivery.entity.User;
 import by.karpov.delivery.repository.UserRepository;
 import by.karpov.delivery.service.UserService;
@@ -39,7 +40,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User save(User user) {
-        log.info("In UserService save {}", user);
         return userRepo.save(user);
     }
 
@@ -67,5 +67,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User getUserFromSecurityContext() {
         String username = getUserDetails().getUsername();
         return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public boolean isExists(User user) {
+       return userRepo.findAll().stream()
+                .map(User::getUsername)
+                .anyMatch(name -> name.equals(user.getUsername()));
+    }
+
+    @Override
+    public boolean deleteAdminRole(User user) {
+        return user.getRoles().remove(Role.ADMIN);
+    }
+
+    @Override
+    public boolean addAdminRole(User user) {
+        return user.getRoles().add(Role.ADMIN);
     }
 }

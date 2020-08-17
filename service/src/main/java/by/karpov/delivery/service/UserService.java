@@ -24,4 +24,9 @@ public interface UserService extends UserDetailsService {
 
     User getUserFromSecurityContext();
 
+    boolean isExists(User user);
+
+    boolean deleteAdminRole(User user);
+
+    boolean addAdminRole(User user);
 }
