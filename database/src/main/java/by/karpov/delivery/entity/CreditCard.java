@@ -3,8 +3,6 @@ package by.karpov.delivery.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -33,12 +31,12 @@ public class CreditCard extends BaseEntity {
         return addDelimiter(cardNumber) + "\t" + cardDate;
     }
 
-    public String addDelimiter(String s){
+    private String addDelimiter(String s) {
         StringBuilder sb = new StringBuilder(s);
         String delimiter = " ";
-        for (int i = 4; i < s.length();) {
+        for (int i = 4; i < s.length(); ) {
             sb.insert(i, delimiter);
-            i+=5;
+            i += 5;
         }
         return sb.toString();
     }

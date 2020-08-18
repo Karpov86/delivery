@@ -8,29 +8,41 @@
 </head>
 <body>
 <div th:insert="header::copy"></div>
+<h2 align="center" th:text="#{profile.page}"></h2>
 <div class="row m-1">
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body" th:object="${currentPersonalInfo}">
-                <h5 class="card-title">User info</h5>
-                <p class="card-text">Username: <span
-                        th:text="${currentUser.getUsername()}"></span></p>
-                <p class="card-text">First name: <span
-                        th:text="*{getFirstName().isEmpty()}?'No first name':*{getFirstName()}"></span></p>
-                <p class="card-text">Last name: <span
-                        th:text="*{getLastName().isEmpty()}?'No last name':*{getLastName()}"></span></p>
-                <p class="card-text">Email: <span th:text="*{getEmail().isEmpty()}?'No email':*{getEmail()}"></span>
-                </p>
-                <p class="card-text">Phone number: <span
-                        th:text="*{getPhoneNumber().isEmpty()}?'No phone number':*{getPhoneNumber()}"></span></p>
-                <a class="btn btn-primary" href="/user/profile/edit">Edit profile</a>
+                <h5 class="card-title" th:text="#{profile.user.info}"></h5>
+                <div class="row mx-1">
+                    <p class="card-text" th:text="#{username}+':'"></p>
+                    <span class="ml-1" th:text="${currentUser.getUsername()}"></span>
+                </div>
+                <div class="row mx-1">
+                    <p class="card-text" th:text="#{first.name}+':'"></p>
+                    <span class="ml-1" th:text="*{getFirstName().isEmpty()}?'No first name':*{getFirstName()}"></span>
+                </div>
+                <div class="row mx-1">
+                    <p class="card-text" th:text="#{last.name}+':'"></p>
+                    <span class="ml-1" th:text="*{getLastName().isEmpty()}?'No last name':*{getLastName()}"></span>
+                </div>
+                <div class="row mx-1">
+                    <p class="card-text" th:text="#{email}+':'"></p>
+                    <span class="ml-1" th:text="*{getEmail().isEmpty()}?'No email':*{getEmail()}"></span>
+                </div>
+                <div class="row mx-1">
+                    <p class="card-text" th:text="#{phone.number}+':'"></p>
+                    <span class="ml-1"
+                          th:text="*{getPhoneNumber().isEmpty()}?'No phone number':*{getPhoneNumber()}"></span>
+                </div>
+                <a class="btn btn-primary" href="/user/profile/edit" th:text="#{profile.edit}"></a>
             </div>
         </div>
     </div>
     <div class="col-sm-5">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Addresses</h5>
+                <h5 class="card-title" th:text="#{profile.address}"></h5>
                 <table class="table" th:object="${currentPersonalInfo}">
                     <tbody>
                     <tr th:if="*{addresses.isEmpty()}">
@@ -39,25 +51,25 @@
                     <tr th:each="address : *{addresses}">
                         <td><span th:text="${address.getFullAddress()}"></span></td>
                         <td><a class="btn btn-link" role="button"
-                               th:href="@{'/address/edit/'+${address?.getId()}}">edit</a></td>
+                               th:href="@{'/address/edit/'+${address?.getId()}}" th:text="#{low.case.edit}"></a></td>
                         <td>
                             <form method="post" th:action="@{/address/delete}">
                                 <input hidden name="id" th:value="${address.id}">
                                 <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                                <button class="btn btn-link" type="submit">delete</button>
+                                <button class="btn btn-link" th:text="#{low.case.del}" type="submit"></button>
                             </form>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <a class="btn btn-primary" href="/address/add">Add address</a>
+                <a class="btn btn-primary" href="/address/add" th:text="#{profile.add.address}"></a>
             </div>
         </div>
     </div>
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Credit cards</h5>
+                <h5 class="card-title" th:text="#{profile.credit.card}"></h5>
                 <table class="table" th:object="${currentPersonalInfo}">
                     <tbody>
                     <tr th:if="*{creditCards.isEmpty()}">
@@ -69,34 +81,17 @@
                             <form method="post" th:action="@{/creditCard/delete}">
                                 <input hidden name="id" th:value="${card.id}">
                                 <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                                <button class="btn btn-link" type="submit">delete</button>
+                                <button class="btn btn-link" th:text="#{low.case.del}" type="submit"></button>
                             </form>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <a class="btn btn-primary" href="/creditCard/add">Add card</a>
+                <a class="btn btn-primary" href="/creditCard/add" th:text="#{profile.add.card}"></a>
             </div>
         </div>
     </div>
 </div>
 <div th:insert="footer::copy"></div>
-<!--<div>
-    <div class="password">
-        <input type="password" id="password-input" placeholder="Введите пароль" name="password">
-        <a href="#" class="password-control"></a>
-    </div>
-    <script>$('body').on('click', '.password-control', function () {
-        if ($('#password-input').attr('type') === 'password') {
-            $(this).addClass('view');
-            $('#password-input').attr('type', 'text');
-        } else {
-            $(this).removeClass('view');
-            $('#password-input').attr('type', 'password');
-        }
-        return false;
-    });</script>
-    <link rel="stylesheet" type="text/css" href="/css/password.css">
-</div>-->
 </body>
 </html>

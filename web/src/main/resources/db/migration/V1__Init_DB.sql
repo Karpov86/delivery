@@ -3,7 +3,7 @@ create table if not exists dishes
     id          bigint auto_increment
         primary key,
     category    varchar(255)   null,
-    description varchar(2048)   null,
+    description varchar(2048)  null,
     sale        bit            null,
     price       decimal(19, 2) null,
     title       varchar(255)   null

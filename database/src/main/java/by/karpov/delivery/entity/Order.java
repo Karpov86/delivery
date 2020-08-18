@@ -35,13 +35,13 @@ public class Order extends BaseEntity {
     )
     private List<Dish> dishes;
 
-    public String getAllDishes(){
+    public String getAllDishes() {
         return dishes.stream()
                 .map(Dish::getTitle)
                 .collect(Collectors.joining(", "));
     }
 
-    public BigDecimal getTotalPrice(){
+    public BigDecimal getTotalPrice() {
         if (!dishes.isEmpty()) {
             return dishes.stream()
                     .map(Dish::getPrice)

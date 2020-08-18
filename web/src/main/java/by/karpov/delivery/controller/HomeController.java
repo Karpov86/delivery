@@ -46,9 +46,13 @@ public class HomeController {
 
     @GetMapping("/menu")
     public String getDishes(
-            @RequestParam String category,
+            @RequestParam(required = false) String category,
             Model model) {
-        model.addAttribute("dishes", dishService.findAllByCategory(Category.valueOf(category.toUpperCase())));
+        if (category == null || category.isEmpty()) {
+            model.addAttribute("dishes", dishService.findAllByCategory(Category.PIZZA));
+        } else {
+            model.addAttribute("dishes", dishService.findAllByCategory(Category.valueOf(category.toUpperCase())));
+        }
         return "menu";
     }
 

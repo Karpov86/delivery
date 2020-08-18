@@ -8,17 +8,18 @@
 </head>
 <body>
 <div th:insert="header::copy"></div>
+<h2 align="center" th:text="#{user.list}"></h2>
 <div class="mx-5">
     <table class="table">
         <thead class="table">
         <tr>
-            <th scope="col">Username</th>
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Phone number</th>
-            <th scope="col">Email</th>
-            <th scope="col">Order list</th>
-            <th scope="col">Role</th>
+            <th scope="col" th:text="#{username}"></th>
+            <th scope="col" th:text="#{first.name}"></th>
+            <th scope="col" th:text="#{last.name}"></th>
+            <th scope="col" th:text="#{phone.number}"></th>
+            <th scope="col" th:text="#{email}"></th>
+            <th scope="col" th:text="#{order.list}"></th>
+            <th scope="col" th:text="#{user.role}">Role</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -27,13 +28,13 @@
             <td colspan="2">No user available</td>
         </tr>
         <tr th:each="user : ${userList}">
-            <td><span th:text="${user.username}">Username</span></td>
-            <td><span th:text="${user.personalInfo.firstName}">First name</span></td>
-            <td><span th:text="${user.personalInfo.lastName}">Last name</span></td>
-            <td><span th:text="${user.personalInfo.phoneNumber}">Phone number</span></td>
-            <td><span th:text="${user.personalInfo.email}">Email</span></td>
+            <td><span th:text="${user.username}"></span></td>
+            <td><span th:text="${user.personalInfo.firstName}"></span></td>
+            <td><span th:text="${user.personalInfo.lastName}"></span></td>
+            <td><span th:text="${user.personalInfo.phoneNumber}"></span></td>
+            <td><span th:text="${user.personalInfo.email}"></span></td>
             <td><a class="btn btn-link" role="button"
-                   th:href="@{'/admin/user/orders/'+${user.id}}">to list</a></td>
+                   th:href="@{'/admin/user/orders/'+${user.id}}" th:text="#{to.list}"></a></td>
             <td><span th:each="role : ${user.roles}"><h6 th:text="${role.authority.toLowerCase()}"></h6></span></td>
             <td>
                 <div th:if="${user.roles.size()==2}">
@@ -41,7 +42,7 @@
                           th:action="@{/admin/user/delAdmin}">
                         <input hidden name="userId" th:value="${user.id}">
                         <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                        <button class="btn btn-danger" type="submit">del admin role</button>
+                        <button class="btn btn-danger" th:text="#{del.admin.role}" type="submit"></button>
                     </form>
                 </div>
                 <div th:if="${user.roles.size()==1}">
@@ -49,7 +50,7 @@
                           th:action="@{/admin/user/addAdmin}">
                         <input hidden name="userId" th:value="${user.id}">
                         <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                        <button class="btn btn-success" type="submit">add admin role</button>
+                        <button class="btn btn-success" th:text="#{add.admin.role}" type="submit"></button>
                     </form>
                 </div>
         </tr>

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
+    @Transactional
     @Override
     public UserDetails getUserDetails() {
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -71,7 +73,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public boolean isExists(User user) {
-       return userRepo.findAll().stream()
+        return userRepo.findAll().stream()
                 .map(User::getUsername)
                 .anyMatch(name -> name.equals(user.getUsername()));
     }

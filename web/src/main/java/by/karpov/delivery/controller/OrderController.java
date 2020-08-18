@@ -56,12 +56,11 @@ public class OrderController {
 
     @PostMapping("/add")
     public String addDish(@RequestParam("dishId") Long id) {
-        //Order order = getCurrentUser().getOrder();
         Order order = orderService.getLastByUser(getCurrentUser());
         Dish dish = dishService.getById(id);
         order.getDishes().add(dish);
         orderService.save(order);
-        return "redirect:/home/dishes?category=" + dish.getCategory();
+        return "redirect:/home/menu?category=" + dish.getCategory();
     }
 
     @PostMapping("/delete")

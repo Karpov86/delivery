@@ -8,14 +8,15 @@
 </head>
 <body>
 <div th:insert="header::copy"></div>
+<h2 th:text="#{dishes}"></h2>
 <div class="mx-5">
     <table class="table">
         <thead class="table">
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category</th>
-            <th scope="col">Description</th>
+            <th scope="col" th:text="#{menu.title}"></th>
+            <th scope="col" th:text="#{menu.price}"></th>
+            <th scope="col" th:text="#{category}"></th>
+            <th scope="col" th:text="#{menu.description}"></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -29,17 +30,17 @@
             <td><span th:text="${dish.category.toString().toLowerCase()}"></span></td>
             <td><span th:text="${dish.description}"></span></td>
             <td class="row w"><a class="btn btn-link" role="button"
-                   th:href="@{'/admin/dish/edit/'+${dish?.id}}">edit</a>
+                                 th:href="@{'/admin/dish/edit/'+${dish?.id}}" th:text="#{low.case.edit}"></a>
                 <form method="post" th:action="@{/admin/dish/delete}">
                     <input hidden name="dishId" th:value="${dish.id}">
                     <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-                    <button class="btn btn-link" type="submit">delete</button>
+                    <button class="btn btn-link" th:text="#{low.case.del}" type="submit"></button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-primary ml-5" href="/admin/dish/add">Add dish</a>
+    <a class="btn btn-primary ml-5" href="/admin/dish/add" th:text="#{add.dish}"></a>
 </div>
 </body>
 <footer>

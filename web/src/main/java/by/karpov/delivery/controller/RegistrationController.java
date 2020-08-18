@@ -58,7 +58,7 @@ public class RegistrationController {
             PersonalInfo personalInfo,
             Model model
     ) {
-        if (userService.isExists(newUser)){
+        if (userService.isExists(newUser)) {
             model.addAttribute("message", "This username already exists");
             return "/registration";
         }

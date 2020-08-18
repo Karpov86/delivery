@@ -8,14 +8,15 @@
 </head>
 <body>
 <div th:insert="header::copy"></div>
+<h2 th:text="#{order.list}"></h2>
 <div class="mx-5">
     <table class="table">
         <thead class="table">
         <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Date</th>
-            <th scope="col">Dishes</th>
-            <th scope="col">Total price</th>
+            <th scope="col" th:text="#{username}"></th>
+            <th scope="col" th:text="#{order.date}"></th>
+            <th scope="col" th:text="#{dishes}"></th>
+            <th scope="col" th:text="#{order.total.price}"></th>
         </tr>
         </thead>
         <tbody>

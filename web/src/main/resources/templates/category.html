@@ -8,13 +8,20 @@
 <div align="center" class="container">
     <form action="/home/menu" method="get">
         <div class="form-group-lg">
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="PIZZA">Pizza</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="SUSHI">Sushi</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="GYROS">Gyros</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="GARNISH">Garnish</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="VEGETARIAN">Vegetarian</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="DESSERT">Desert</button>
-            <button class="btn btn-primary btn-lg" name="category" type="submit" value="DRINK">Drink</button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.pizza}" type="submit"
+                    value="PIZZA"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.sushi}" type="submit"
+                    value="SUSHI"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.gyros}" type="submit"
+                    value="GYROS"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.garnish}" type="submit"
+                    value="GARNISH"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.vegetarian}" type="submit"
+                    value="VEGETARIAN"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.desert}" type="submit"
+                    value="DESSERT"></button>
+            <button class="btn btn-primary btn-lg" name="category" th:text="#{category.drink}" type="submit"
+                    value="DRINK"></button>
         </div>
     </form>
 </div>

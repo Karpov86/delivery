@@ -6,10 +6,6 @@ import by.karpov.delivery.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.transaction.annotation.Transactional;
 
 class UserServiceTest extends BaseTest {
 
@@ -37,6 +33,10 @@ class UserServiceTest extends BaseTest {
 
     @Test
     void update() {
+        User byId = userService.getById(1L);
+        byId.setUsername("Boby");
+        userService.update(byId);
+        System.out.println(userService.getById(1L).getUsername());
     }
 
     @Test
